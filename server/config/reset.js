@@ -9,8 +9,9 @@ const createItemsTable = async () => {
     CREATE TABLE IF NOT EXISTS items (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        image VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL,
+        eventCity VARCHAR(255) NOT NULL,
+        eventDescription TEXT NOT NULL,
+        eventTime VARCHAR(255) NOT NULL,
         submittedBy VARCHAR(255) NOT NULL,
         submittedOn TIMESTAMP NOT NULL
     )
@@ -25,17 +26,20 @@ const createItemsTable = async () => {
 const seedItemsTable = async() => {
     await createItemsTable()
 
-    itemsData.forEach((item) => {
+    eventsData.forEach((item) => {
         const insertQuery = {
-            text: 'INSERT INTO items (eventName, description, image, submittedOn, submittedBy) VALUES ($1, $2, $3, $4, $5)'
+            text: 'INSERT INTO items (name, eventDate, eventCity, eventDescription, eventLocation,eventTime, submittedBy) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
         }
 
         const values = [
-            item.title,
-            item.description,
-            item.image,
-            item.submittedOn,
-            item.submittedBy
+            item.name,
+            item.eventDate,
+            item.eventCity,
+            item.eventDescription,
+            item.eventLocation,
+            item.eventTime,
+            item.submittedBy,
+            item.submittedOn
         ]
 
         pool.query(insertQuery, values, (err,res) => {
@@ -43,7 +47,7 @@ const seedItemsTable = async() => {
                 console.error("⚠️ error inserting item", err)
                 return;
             }
-            console.log(`${item.title} added successfully`)
+            console.log(`${item.name} added successfully`)
         })
 
     })

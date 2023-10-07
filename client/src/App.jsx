@@ -5,6 +5,18 @@ import LocationEvents from './pages/LocationEvents'
 import Events from './pages/Events'
 import './App.css'
 
+const [events, setEvents] = useState(null)
+
+useEffect(() => {
+  const fetchEvents = async() => {
+    const response = await fetch('/events')
+    const data = await response.json()
+    setEvents(data)
+  }
+
+  fetchEvents();
+})
+
 const App = () => {
   let element = useRoutes([
     {
