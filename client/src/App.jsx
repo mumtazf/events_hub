@@ -1,12 +1,16 @@
 import React from 'react'
+import { useState, useEffect} from 'react'
 import { useRoutes, Link } from 'react-router-dom'
 import Locations from './pages/Locations'
 import LocationEvents from './pages/LocationEvents'
-import Events from './pages/Events'
+// import Events from './pages/Events'
 import './App.css'
 
-const [events, setEvents] = useState(null)
 
+const App = () => {
+  const [events, setEvents] = useState([])
+
+  
 useEffect(() => {
   const fetchEvents = async() => {
     const response = await fetch('/events')
@@ -17,10 +21,9 @@ useEffect(() => {
   fetchEvents();
 })
 
-const App = () => {
   let element = useRoutes([
     {
-      path: '/',
+      path: '/events',
       element: <Locations />
     },
     {
@@ -39,10 +42,10 @@ const App = () => {
       path: '/americanairlines',
       element: <LocationEvents index={4} />
     },
-    {
-      path: '/events',
-      element: <Events />
-    }
+    // {
+    //   path: '/events',
+    //   element: <Events />
+    // }
   ])
 
   return (

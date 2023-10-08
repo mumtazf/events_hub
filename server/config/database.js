@@ -1,11 +1,11 @@
 import pg from 'pg'
 
 const config = {
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    host: process.env.PGHOST,
-    port: process.env.PGPORT,
-    database: process.env.PGDATABASE
+    user: "postgres",
+    password: "yCf9W1U21wE2TbuWTmKY",
+    host: "containers-us-west-111.railway.app",
+    port: 6308,
+    database: "railway"
 }
 
 const pool = new pg.Pool(config)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import LocationsAPI from '../services/LocationsAPI'
+import LocationsAPI from '../services/LocationsAPI.js'
 import unitygrid from '../assets/unitygrid.jpg'
 import '../css/Locations.css'
 
@@ -13,11 +13,12 @@ const Locations = () => {
             try {
                 const locationsData = await LocationsAPI.getAllLocations()
                 setLocations(locationsData)
-
+                console.log("from locations.jsx")
                 setVenueNames({venue1: locationsData[0].name, venue2: locationsData[1].name, venue3: locationsData[2].name, venue4: locationsData[3].name})
                 setListeners()
             }
             catch (error) {
+                console.log("error in locations.jsx")
                 throw error
             }
         }) ()
